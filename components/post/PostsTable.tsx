@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { RedditPost } from "@/lib/reddit";
+import { RedditPost } from "@/lib/types/reddit";
 import { formatDistanceToNow } from "date-fns";
 
 interface PostsTableProps {
@@ -15,7 +15,7 @@ interface PostsTableProps {
   onRowClick: (post: RedditPost) => void;
 }
 
-type SortField = "score" | "numComments" | "createdAt";
+type SortField = "score" | "numComments" | "created_utc";
 type SortOrder = "asc" | "desc";
 
 export function PostsTable({ posts, onRowClick }: PostsTableProps) {
@@ -23,17 +23,11 @@ export function PostsTable({ posts, onRowClick }: PostsTableProps) {
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
   const sortedPosts = [...posts].sort((a, b) => {
-    if (sortField === "createdAt") {
-      const aDate = a[sortField] as Date;
-      const bDate = b[sortField] as Date;
-      return sortOrder === "asc"
-        ? aDate.getTime() - bDate.getTime()
-        : bDate.getTime() - aDate.getTime();
-    }
-
-    const aValue = a[sortField] as number;
-    const bValue = b[sortField] as number;
-    return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
+    const aValue = a[sortField];
+    const bValue = b[sortField];
+    return sortOrder === "asc" ? 
+      Number(aValue) - Number(bValue) : 
+      Number(bValue) - Number(aValue);
   });
 
   const handleSort = (field: SortField) => {
@@ -65,9 +59,9 @@ export function PostsTable({ posts, onRowClick }: PostsTableProps) {
             </TableHead>
             <TableHead
               className="w-[20%] cursor-pointer text-right"
-              onClick={() => handleSort("createdAt")}
+              onClick={() => handleSort("created_utc")}
             >
-              Posted {sortField === "createdAt" && (sortOrder === "asc" ? "↑" : "↓")}
+              Posted {sortField === "created_utc" && (sortOrder === "asc" ? "↑" : "↓")}
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -84,7 +78,7 @@ export function PostsTable({ posts, onRowClick }: PostsTableProps) {
               <TableCell className="text-right">{post.score}</TableCell>
               <TableCell className="text-right">{post.numComments}</TableCell>
               <TableCell className="text-right">
-                {formatDistanceToNow(post.createdAt, { addSuffix: true })}
+                {formatDistanceToNow(new Date(post.created_utc * 1000), { addSuffix: true })}
               </TableCell>
             </TableRow>
           ))}

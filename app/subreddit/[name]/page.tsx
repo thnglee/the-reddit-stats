@@ -1,17 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { use } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PostsTable } from "@/components/post/PostsTable";
-import { fetchRecentPosts, RedditPost } from "@/lib/reddit";
+import { ThemeCards } from "@/components/post/ThemeCards";
+import { Button } from "@/components/ui/button";
+import { RefreshCw } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useRedditStore } from "@/lib/store";
 
 interface SubredditPageProps {
   params: Promise<{
@@ -21,35 +24,51 @@ interface SubredditPageProps {
 
 export default function SubredditPage({ params }: SubredditPageProps) {
   const { name: subredditName } = use(params);
-  const [posts, setPosts] = useState<RedditPost[]>([]);
-  const [selectedPost, setSelectedPost] = useState<RedditPost | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  
+  // Get state and actions from the store
+  const {
+    posts,
+    isLoadingPosts,
+    postsError,
+    themeAnalysis,
+    isAnalyzing,
+    analysisError,
+    selectedPost,
+    fetchPosts,
+    analyzePosts,
+    setSelectedPost
+  } = useRedditStore();
 
+  // Fetch posts when the subreddit changes
   useEffect(() => {
-    async function loadPosts() {
-      try {
-        setIsLoading(true);
-        setError(null);
-        console.log(`Loading posts for r/${subredditName}...`);
-        const fetchedPosts = await fetchRecentPosts(subredditName);
-        console.log(`Received ${fetchedPosts.length} posts for r/${subredditName}`);
-        setPosts(fetchedPosts);
-      } catch (error: any) {
-        console.error(`Error loading posts for r/${subredditName}:`, error);
-        setError(error.message || 'Failed to load posts');
-      } finally {
-        setIsLoading(false);
-      }
-    }
+    fetchPosts(subredditName);
+  }, [subredditName, fetchPosts]);
 
-    loadPosts();
-  }, [subredditName]);
+  // Analyze posts when they change
+  useEffect(() => {
+    if (posts.length > 0) {
+      analyzePosts(posts);
+    }
+  }, [posts, analyzePosts]);
+
+  // Handle manual refresh
+  const handleRefresh = async () => {
+    await fetchPosts(subredditName);
+  };
 
   return (
     <main className="container mx-auto py-8">
-      <div className="mb-8">
+      <div className="mb-8 flex justify-between items-center">
         <h1 className="text-3xl font-bold">r/{subredditName}</h1>
+        <Button
+          onClick={handleRefresh}
+          disabled={isLoadingPosts}
+          variant="outline"
+          className="gap-2"
+        >
+          <RefreshCw className={`h-4 w-4 ${isLoadingPosts ? 'animate-spin' : ''}`} />
+          {isLoadingPosts ? 'Refreshing...' : 'Refresh'}
+        </Button>
       </div>
 
       <Tabs defaultValue="top-posts" className="w-full">
@@ -59,11 +78,14 @@ export default function SubredditPage({ params }: SubredditPageProps) {
         </TabsList>
         <TabsContent value="top-posts">
           <div className="mt-4">
-            {isLoading ? (
+            {isLoadingPosts ? (
               <p>Loading posts from r/{subredditName}...</p>
-            ) : error ? (
+            ) : postsError ? (
               <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
+                <AlertTitle>{postsError.message}</AlertTitle>
+                {postsError.details && (
+                  <AlertDescription className="mt-2">{postsError.details}</AlertDescription>
+                )}
               </Alert>
             ) : posts.length === 0 ? (
               <p>No posts found in the last 24 hours.</p>
@@ -77,7 +99,20 @@ export default function SubredditPage({ params }: SubredditPageProps) {
         </TabsContent>
         <TabsContent value="themes">
           <div className="mt-4">
-            <p>Themes content coming soon...</p>
+            {isAnalyzing ? (
+              <p>Analyzing themes...</p>
+            ) : analysisError ? (
+              <Alert variant="destructive">
+                <AlertTitle>{analysisError.message}</AlertTitle>
+                {analysisError.details && (
+                  <AlertDescription className="mt-2">{analysisError.details}</AlertDescription>
+                )}
+              </Alert>
+            ) : themeAnalysis ? (
+              <ThemeCards categories={themeAnalysis.categories} />
+            ) : (
+              <p>No theme analysis available.</p>
+            )}
           </div>
         </TabsContent>
       </Tabs>

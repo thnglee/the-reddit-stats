@@ -97,33 +97,70 @@ Each post should include:
 ## Project File Structure
 
 ```
-the-reddit-stats/
-├─ app/
-│  ├─ page.tsx                       # Homepage: subreddit list + add modal
-│  ├─ subreddit/
-│  │  └─ [name]/
-│  │     ├─ page.tsx                # Subreddit page with tabs
-│  │     └─ themes.tsx             # (Optional split tab logic)
-├─ components/
-│  ├─ subreddit/
-│  │  ├─ SubredditCard.tsx
-│  │  ├─ AddSubredditModal.tsx
-│  │  └─ ThemePanel.tsx
-│  ├─ post/
+the-reddit-stats
+├─ .cursor
+│  └─ rules
+│     └─ coding-preference.mdc
+├─ app
+│  ├─ api
+│  │  ├─ analyze
+│  │  │  └─ route.ts
+│  │  └─ reddit
+│  │     └─ posts
+│  │        └─ route.ts
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  └─ subreddit
+│     └─ [name]
+│        └─ page.tsx
+├─ components
+│  ├─ post
 │  │  ├─ PostsTable.tsx
 │  │  └─ ThemeCards.tsx
-│  └─ ui/                            # shadcn components
-├─ lib/
-│  ├─ reddit.ts                     # Reddit fetch logic
-│  ├─ openai.ts                     # Post categorization logic
-│  ├─ constants.ts                  # Predefined categories and labels
-│  └─ utils.ts                      # Utility functions
-├─ types/
-│  └─ index.ts                      # Shared types (Post, AnalysisResult)
-├─ data/
-│  └─ subreddits.ts                 # Local state for subreddit list
-├─ public/                          # Static assets
-├─ .env                             # Env vars for Reddit/OpenAI API
+│  ├─ subreddit
+│  │  ├─ AddSubredditModal.tsx
+│  │  └─ SubredditCard.tsx
+│  └─ ui
+│     ├─ alert.tsx
+│     ├─ badge.tsx
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     ├─ dialog.tsx
+│     ├─ input.tsx
+│     ├─ label.tsx
+│     ├─ sheet.tsx
+│     ├─ table.tsx
+│     └─ tabs.tsx
+├─ components.json
+├─ data
+│  └─ subreddits.ts
+├─ eslint.config.mjs
+├─ instructions
+│  └─ instructions.md
+├─ lib
+│  ├─ analyzeThemes.ts
+│  ├─ config
+│  │  ├─ env.ts
+│  │  └─ themes.ts
+│  ├─ reddit.ts
+│  ├─ store.ts
+│  ├─ types
+│  │  └─ reddit.ts
+│  └─ utils.ts
+├─ next.config.js
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+└─ tsconfig.json
 ```
 
 ---

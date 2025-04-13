@@ -41,27 +41,54 @@ the-reddit-stats
 │  └─ rules
 │     └─ coding-preference.mdc
 ├─ app
+│  ├─ api
+│  │  ├─ analyze
+│  │  │  └─ route.ts
+│  │  └─ reddit
+│  │     └─ posts
+│  │        └─ route.ts
 │  ├─ favicon.ico
 │  ├─ globals.css
 │  ├─ layout.tsx
-│  └─ page.tsx
+│  ├─ page.tsx
+│  └─ subreddit
+│     └─ [name]
+│        └─ page.tsx
 ├─ components
+│  ├─ post
+│  │  ├─ PostsTable.tsx
+│  │  └─ ThemeCards.tsx
+│  ├─ subreddit
+│  │  ├─ AddSubredditModal.tsx
+│  │  └─ SubredditCard.tsx
 │  └─ ui
+│     ├─ alert.tsx
 │     ├─ badge.tsx
 │     ├─ button.tsx
 │     ├─ card.tsx
+│     ├─ dialog.tsx
 │     ├─ input.tsx
 │     ├─ label.tsx
 │     ├─ sheet.tsx
 │     ├─ table.tsx
 │     └─ tabs.tsx
 ├─ components.json
+├─ data
+│  └─ subreddits.ts
 ├─ eslint.config.mjs
 ├─ instructions
 │  └─ instructions.md
 ├─ lib
+│  ├─ analyzeThemes.ts
+│  ├─ config
+│  │  ├─ env.ts
+│  │  └─ themes.ts
+│  ├─ reddit.ts
+│  ├─ store.ts
+│  ├─ types
+│  │  └─ reddit.ts
 │  └─ utils.ts
-├─ next.config.ts
+├─ next.config.js
 ├─ package-lock.json
 ├─ package.json
 ├─ postcss.config.mjs
