@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/a220dd8a-016d-43b2-a3a9-164eb250f038)# The Reddit Stats
+# The Reddit Stats
 
 A powerful Reddit analytics tool that fetches and analyzes posts from any subreddit using AI to categorize discussions into meaningful themes.
 
