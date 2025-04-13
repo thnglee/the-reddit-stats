@@ -1,6 +1,10 @@
-# The Reddit Stats
+![image](https://github.com/user-attachments/assets/a220dd8a-016d-43b2-a3a9-164eb250f038)# The Reddit Stats
 
 A powerful Reddit analytics tool that fetches and analyzes posts from any subreddit using AI to categorize discussions into meaningful themes.
+
+![Screenshot (102)](https://github.com/user-attachments/assets/433bba9d-a4be-4de0-8589-6472b2e62de2)
+![Screenshot (105)](https://github.com/user-attachments/assets/855c8af0-6014-46fd-a3a5-34e0477e37d5)
+![Screenshot (106)](https://github.com/user-attachments/assets/a07c13fe-968e-479f-89de-87f00150b3d7)
 
 ## Features
 
