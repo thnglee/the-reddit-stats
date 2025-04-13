@@ -63,7 +63,7 @@ Important:
       temperature: 0.7,
     });
 
-    const content = completion.choices[0].message.content;
+    const content = completion.choices[0].message.content;  
     if (!content) {
       throw new Error('No content received from OpenAI');
     }

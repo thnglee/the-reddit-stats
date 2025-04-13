@@ -1,104 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Reddit Stats
 
-## Getting Started
+A powerful Reddit analytics tool that fetches and analyzes posts from any subreddit using AI to categorize discussions into meaningful themes.
 
-First, run the development server:
+## Features
 
+- **Subreddit Monitoring**: Add and track multiple subreddits
+- **Real-time Post Fetching**: Get the latest posts from the last 24 hours
+- **AI-Powered Theme Analysis**: Automatically categorizes posts into themes:
+  - Solution Requests: Posts seeking specific problem solutions
+  - Pain & Anger: Posts expressing frustration or emotional distress
+  - Advice Requests: Posts asking for general guidance
+  - Money Talk: Posts discussing financial aspects
+- **Interactive UI**: Modern, responsive interface with real-time updates
+- **Data Persistence**: Caches results for better performance
+
+## Tech Stack
+
+- **Frontend**: Next.js 14 with TypeScript and Tailwind CSS
+- **Backend**: 
+  - Supabase for data storage
+  - Reddit API (via snoowrap) for post fetching
+  - OpenAI GPT-4 for theme analysis
+- **State Management**: Zustand
+- **UI Components**: Shadcn/ui
+
+## Setup
+
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd the-reddit-stats
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables in `.env.local`:
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_key
+
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
+
+# Reddit API
+REDDIT_CLIENT_ID=your_reddit_client_id
+REDDIT_CLIENT_SECRET=your_reddit_client_secret
+REDDIT_REFRESH_TOKEN=your_reddit_refresh_token
+REDDIT_USER_AGENT=your_reddit_user_agent
+```
+
+4. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) to view the application
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Add Subreddits**:
+   - Click "Add Subreddit" button
+   - Enter subreddit name (without r/)
+   - Optionally add a description
 
-## Learn More
+2. **View Posts**:
+   - Click on any subreddit card
+   - Posts from the last 24 hours will be fetched
+   - View posts in a table format
 
-To learn more about Next.js, take a look at the following resources:
+3. **Theme Analysis**:
+   - Switch to the "Themes" tab
+   - View posts categorized by theme
+   - Click on categories to see related posts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-```
-the-reddit-stats
-├─ .cursor
-│  └─ rules
-│     └─ coding-preference.mdc
-├─ app
-│  ├─ api
-│  │  ├─ analyze
-│  │  │  └─ route.ts
-│  │  └─ reddit
-│  │     └─ posts
-│  │        └─ route.ts
-│  ├─ favicon.ico
-│  ├─ globals.css
-│  ├─ layout.tsx
-│  ├─ page.tsx
-│  └─ subreddit
-│     └─ [name]
-│        └─ page.tsx
-├─ components
-│  ├─ post
-│  │  ├─ PostsTable.tsx
-│  │  └─ ThemeCards.tsx
-│  ├─ subreddit
-│  │  ├─ AddSubredditModal.tsx
-│  │  └─ SubredditCard.tsx
-│  └─ ui
-│     ├─ alert.tsx
-│     ├─ badge.tsx
-│     ├─ button.tsx
-│     ├─ card.tsx
-│     ├─ dialog.tsx
-│     ├─ input.tsx
-│     ├─ label.tsx
-│     ├─ sheet.tsx
-│     ├─ table.tsx
-│     └─ tabs.tsx
-├─ components.json
-├─ data
-│  └─ subreddits.ts
-├─ eslint.config.mjs
-├─ instructions
-│  └─ instructions.md
-├─ lib
-│  ├─ analyzeThemes.ts
-│  ├─ config
-│  │  ├─ env.ts
-│  │  └─ themes.ts
-│  ├─ reddit.ts
-│  ├─ store.ts
-│  ├─ types
-│  │  └─ reddit.ts
-│  └─ utils.ts
-├─ next.config.js
-├─ package-lock.json
-├─ package.json
-├─ postcss.config.mjs
-├─ public
-│  ├─ file.svg
-│  ├─ globe.svg
-│  ├─ next.svg
-│  ├─ vercel.svg
-│  └─ window.svg
-├─ README.md
-└─ tsconfig.json
+## Project Structure
 
 ```
+the-reddit-stats/
+├─ app/                  # Next.js app router pages
+├─ components/           # React components
+│  ├─ post/             # Post-related components
+│  ├─ subreddit/        # Subreddit-related components
+│  └─ ui/               # Shared UI components
+├─ lib/                 # Core functionality
+│  ├─ services/         # Backend services
+│  ├─ config/           # Configuration
+│  └─ types/            # TypeScript types
+└─ public/              # Static assets
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
