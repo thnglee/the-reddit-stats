@@ -15,9 +15,10 @@ A powerful Reddit analytics tool that fetches and analyzes posts from any subred
   </tr>
   <tr>
     <td style="text-align:center;">
-      <img src="https://github.com/user-attachments/assets/cfeba981-7c01-435a-a739-9fb3bff338c6" width="80%"/>
+      <img src="https://github.com/user-attachments/assets/bfc226e8-f265-428c-9b92-c4695b0c934a" width="80%"/>
     </td>
   </tr>
+
   <tr>
     <td style="text-align:center;">
       <img src="https://github.com/user-attachments/assets/924a95b9-47b2-46e8-81c5-f84c7a618de6" width="80%"/>
@@ -29,6 +30,7 @@ A powerful Reddit analytics tool that fetches and analyzes posts from any subred
     </td>
   </tr>
 </table>
+
 
 
 
