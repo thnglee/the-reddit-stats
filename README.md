@@ -2,9 +2,21 @@
 
 A powerful Reddit analytics tool that fetches and analyzes posts from any subreddit using AI to categorize discussions into meaningful themes.
 
-![Screenshot (102)](https://github.com/user-attachments/assets/433bba9d-a4be-4de0-8589-6472b2e62de2)
-![Screenshot (105)](https://github.com/user-attachments/assets/855c8af0-6014-46fd-a3a5-34e0477e37d5)
-![Screenshot (106)](https://github.com/user-attachments/assets/a07c13fe-968e-479f-89de-87f00150b3d7)
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/7654fb20-d71e-4963-87ac-ff501b4c102b" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/ed10fd4e-3a14-4c54-83a4-771173d4961f" width="200"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/bfc226e8-f265-428c-9b92-c4695b0c934a" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/cfeba981-7c01-435a-a739-9fb3bff338c6" width="200"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/924a95b9-47b2-46e8-81c5-f84c7a618de6" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/7bd7e4ce-ad67-4970-b8c9-bd4ba4d2927e" width="200"/></td>
+  </tr>
+</table>
+
 
 ## Features
 
